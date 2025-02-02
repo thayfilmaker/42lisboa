@@ -3,39 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlucena- <mlucena-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: lgribble <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 22:21:29 by mlucena-          #+#    #+#             */
-/*   Updated: 2025/01/30 17:07:48 by mlucena-         ###   ########.fr       */
+/*   Created: 2025/02/01 20:28:53 by lgribble          #+#    #+#             */
+/*   Updated: 2025/02/01 21:43:23 by lgribble         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*procura uma substring dentro de uma string se nao encontrar retorna nulo*/
-/**/
-
-#include <unistd.h>
 #include <stdio.h>
 
 char *ft_strstr(char *str, char *to_find)
 {
-	int	x;
-	int i;
+    unsigned int i;
+    unsigned int m;
 
-	i = 0;
-	x = 0;
-	if(str[i] == to_find[x])
+    i = 0;
+    m = 0;
+    if (to_find[m] == '\0')
+		return(str);
+	while (str[i] != '\0')
 	{
-		x++;
-		/*maybe i++here too*/
+		while (str[i + m] == to_find[m] && str[i + m] !='\0')
+			m++;
+		if (to_find[m] == '\0')
+			return(str + i);
+		i++;
+		m = 0;
 	}
-	i++;
-	return(str[i]);
+	return (0);
 }
 
-int main()
-{
-	char str[] = "ola meu nome e mariana lins";
-	char to_find[] = "mariana";
+int main() {
+    char str[] = "Eu sou foda";
+    char to_find[] = "sou";
+	char *result;
 
-	printf("%s", ft_strstr(str, to_find));
+	result = ft_strstr(str, to_find);
+
+      if (result) {
+        printf("Substring found: %s\n", result);
+    } else {
+        printf("Substring not found.\n");
+    }
+
+    return 0;
 }
